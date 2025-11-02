@@ -120,3 +120,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+INSTALLED_APPS = [
+    # ... other apps
+    'bookshelf',
+]
+INSTALLED_APPS = [
+    'django.contrib.admin',         # ← ADD THIS
+    'django.contrib.auth',          # ← Usually already there
+    'django.contrib.contenttypes',  # ← Usually already there
+    'django.contrib.sessions',      # ← Usually already there
+    'django.contrib.messages',      # ← Usually already there
+    'django.contrib.staticfiles',   # ← Usually already there
+    'bookshelf',                    # ← Your app
+]
