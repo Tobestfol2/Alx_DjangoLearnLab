@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Books</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 8px; background: #f4f4f4; margin: 5px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Books Available:</h1>
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li><strong>{{ book.title }}</strong> by {{ book.author.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books available.</p>
+    {% endif %}
+    <p><a href="{% url 'relationship_app:library_detail' 1 %}">View Library #1</a></p>
+</body>
+</html>
