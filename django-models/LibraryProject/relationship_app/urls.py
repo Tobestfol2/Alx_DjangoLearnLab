@@ -14,9 +14,13 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-
-    # Role-Based Views
     path('admin/', admin_view, name='admin_view'),
     path('librarian/', librarian_view, name='librarian_view'),
     path('member/', member_view, name='member_view'),
+
+    # CRUD Book URLs
+    path('book/list/', views.book_list, name='book_list'),
+    path('book/add/', views.add_book, name='add_book'),
+    path('book/edit/<int:pk>/', views.edit_book, name='edit_book'),
+    path('book/delete/<int:pk>/', views.delete_book, name='delete_book'),
 ]
