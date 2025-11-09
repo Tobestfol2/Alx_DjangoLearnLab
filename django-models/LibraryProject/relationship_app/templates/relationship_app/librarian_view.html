@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Librarian Panel</title>
+    <style>
+        body { font-family: Arial; background: #e8f5e9; margin: 40px; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #27ae60; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Librarian Panel</h1>
+        <p>Welcome, <strong>{{ user.username }}</strong></p>
+        <p>You can manage books and members.</p>
+        <a href="{% url 'relationship_app:logout' %}">Logout</a>
+    </div>
+</body>
+</html>

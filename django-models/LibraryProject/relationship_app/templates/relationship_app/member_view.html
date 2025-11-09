@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Member Area</title>
+    <style>
+        body { font-family: Arial; background: #e3f2fd; margin: 40px; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Member Area</h1>
+        <p>Welcome, <strong>{{ user.username }}</strong></p>
+        <p>You can browse the library.</p>
+        <a href="{% url 'relationship_app:list_books' %}">View Books</a> | 
+        <a href="{% url 'relationship_app:logout' %}">Logout</a>
+    </div>
+</body>
+</html>
