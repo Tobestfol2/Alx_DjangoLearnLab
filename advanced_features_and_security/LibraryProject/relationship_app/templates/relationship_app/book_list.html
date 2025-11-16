@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #f9f9f9; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #f0f0f0; }
+        .actions a { margin-right: 10px; color: #007bff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Book List</h1>
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'relationship_app:add_book' %}">Add New Book</a></p>
+    {% endif %}
+
+    {% if books %}
+    <table>
+        <tr><th>Title</th><th>Author</th><th>Actions</th></tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author.name }}</td>
+            <td class="actions">
+                {% if perms.relationship_app.can_change_book %}
+                    <a href="{% url 'relationship_app:edit_book' book.pk %}">Edit</a>
+                {% endif %}
+                {% if perms.relationship_app.can_delete_book %}
+                    <a href="{% url 'relationship_app:delete_book' book.pk %}">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No books available.</p>
+    {% endif %}
+</body>
+</html>
