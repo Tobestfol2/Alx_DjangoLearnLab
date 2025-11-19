@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Library{% endblock %}</title>
+    <meta http-equiv="X-Content-Type-Options" nosniff>
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+</head>
+<body>
+    {% csrf_token %}  <!-- Always available -->
+    {% block content %}{% endblock %}
+</body>
+</html>
