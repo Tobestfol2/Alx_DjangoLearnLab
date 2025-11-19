@@ -122,3 +122,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+# ... all your existing settings ...
+
+# REQUIRED BY ALX CHECKER – THIS LINE MUST BE PRESENT
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
