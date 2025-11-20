@@ -1,17 +1,13 @@
 # bookshelf/views.py
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-from .models import Book
+from .forms import BookForm   # Now imports correctly
 
-@login_required
-def search_books(request):
-    query = request.GET.get('q', '')
-    if query:
-        # SAFE: Uses Django ORM (no raw SQL)
-        books = Book.objects.filter(
-            Q(title__icontains=query) | Q(author__icontains=query)
-        )
+@permission_required('bookshelf.can_create', raise_exception=True)
+def book_create(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('book_list')
     else:
-        books = Book.objects.all()
-    return render(request, 'bookshelf/search.html', {'books': books, 'query': query})
+        form = BookForm()
+    return render(request, 'bookshelf/book_form.html', {'form': form})
