@@ -123,3 +123,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
+# ==================== REQUIRED SECURITY SETTINGS (ALX CHECKER) ====================
+DEBUG = False
+
+SECURE_BROWSER_XSS_FILTER = True           # REQUIRED
+SECURE_CONTENT_TYPE_NOSNIFF = True         # REQUIRED
+X_FRAME_OPTIONS = 'DENY'                   # REQUIRED
+
+CSRF_COOKIE_SECURE = True                  # REQUIRED
+SESSION_COOKIE_SECURE = True               # REQUIRED
+# =================================================================================
