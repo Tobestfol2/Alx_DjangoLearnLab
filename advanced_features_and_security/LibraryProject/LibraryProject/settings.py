@@ -143,3 +143,17 @@ SECURE_HSTS_PRELOAD = True
 SESSION_COOKIE_SECURE = True                    # Cookies only over HTTPS
 CSRF_COOKIE_SECURE = True                       # CSRF cookie only over HTTPS
 # =========================================================================
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')   # REQUIRED BY ALX
+SECURE_SSL_REDIRECT = True                                      # (already added earlier)
+# ==================== HTTPS + PROXY SUPPORT (ALX REQUIRED) ====================
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')   # REQUIRED STRING #1
+# This tells Django to trust the "X-Forwarded-Proto: https" header from Nginx/reverse proxy
+
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+# ============================================================================
