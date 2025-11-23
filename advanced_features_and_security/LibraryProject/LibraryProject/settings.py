@@ -132,4 +132,14 @@ X_FRAME_OPTIONS = 'DENY'                   # REQUIRED
 
 CSRF_COOKIE_SECURE = True                  # REQUIRED
 SESSION_COOKIE_SECURE = True               # REQUIRED
+SECURE_SSL_REDIRECT = True    # REQUIRED BY ALX – Forces HTTP → HTTPS
 # =================================================================================
+# ==================== HTTPS ENFORCEMENT (ALX REQUIRED) ====================
+SECURE_SSL_REDIRECT = True                      # Redirect all HTTP to HTTPS
+SECURE_HSTS_SECONDS = 31536000                  # 1 year HSTS
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+SESSION_COOKIE_SECURE = True                    # Cookies only over HTTPS
+CSRF_COOKIE_SECURE = True                       # CSRF cookie only over HTTPS
+# =========================================================================
