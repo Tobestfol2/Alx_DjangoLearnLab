@@ -6,9 +6,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Book
 from .serializers import BookSerializer
 
-# Required to silence false linter warning – we may be used later
-# or just leave this comment here and the warning disappears permanently
-
 
 # 1. List all books – anyone can view
 class BookListView(generics.ListAPIView):
@@ -18,6 +15,8 @@ class BookListView(generics.ListAPIView):
     
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['title', 'author', 'publication_year']
+    # ordering_fields = ['publication_year', 'title']   # optional – you can add later
+    # ordering = ['title']
 
 
 # 2. Retrieve single book – anyone can view
@@ -34,10 +33,10 @@ class BookCreateView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save()  # later you can do serializer.save(author=self.request.user)
+        serializer.save()
 
 
-# 4. Update book – only logged-in users
+# 4. Update book – only authenticated users
 class BookUpdateView(generics.UpdateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -45,11 +44,9 @@ class BookUpdateView(generics.UpdateAPIView):
     lookup_field = 'pk'
 
 
-# 5. Delete book – only logged-in users
+# 5. Delete book – only authenticated users
 class BookDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'pk'
-    
-    from rest_framework.filters import OrderingFilter
