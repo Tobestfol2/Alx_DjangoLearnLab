@@ -50,3 +50,5 @@ class BookDeleteView(generics.DestroyAPIView):
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'pk'
+    
+    filters.OrderingFilter
