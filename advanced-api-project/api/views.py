@@ -1,11 +1,10 @@
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework import generics, permissions
 from django_filters import rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Book
 from .serializers import BookSerializer
-from rest_framework.filters import SearchFilter
 
 
 # 1. List all books – anyone can view
@@ -16,8 +15,6 @@ class BookListView(generics.ListAPIView):
     
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['title', 'author', 'publication_year']
-    # ordering_fields = ['publication_year', 'title']   # optional – you can add later
-    # ordering = ['title']
 
 
 # 2. Retrieve single book – anyone can view
@@ -51,5 +48,3 @@ class BookDeleteView(generics.DestroyAPIView):
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'pk'
-    
-    filters.OrderingFilter
