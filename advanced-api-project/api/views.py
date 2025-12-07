@@ -5,6 +5,7 @@ from django_filters import rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Book
 from .serializers import BookSerializer
+from rest_framework.filters import SearchFilter
 
 
 # 1. List all books – anyone can view
