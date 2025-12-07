@@ -51,3 +51,5 @@ class BookDeleteView(generics.DestroyAPIView):
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'pk'
+    
+    from rest_framework.filters import OrderingFilter
