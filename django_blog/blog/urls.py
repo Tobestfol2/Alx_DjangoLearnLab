@@ -6,10 +6,10 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     # Your existing blog URLs here...
     
-    path('register/', views.register_view, name='register'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('profile/', views.profile_view, name='profile'),
+    path('accounts/register/', views.register_view, name='register'),
+    path('accounts/login/',    views.login_view,    name='login'),
+    path('accounts/logout/',   views.logout_view,   name='logout'),
+    path('accounts/profile/',  views.profile_view,  name='profile'),
 
     # Optional: Password change (built-in)
     path('password/change/', auth_views.PasswordChangeView.as_view(
