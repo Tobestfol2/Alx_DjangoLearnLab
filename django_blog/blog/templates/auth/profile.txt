@@ -1,14 +1,11 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block title %}Profile{% endblock %}
-
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card shadow">
-            <div class="card-header">
-                <h3>User Profile</h3>
-            </div>
             <div class="card-body">
+                <h3>Profile</h3>
                 <p><strong>Username:</strong> {{ user.username }}</p>
                 <p><strong>Email:</strong> {{ user.email|default:"Not set" }}</p>
 
@@ -16,19 +13,13 @@
                 <form method="post">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control"
-                               value="{{ user.email }}" required>
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{ user.email }}" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
-
-                <hr>
-                <a href="{% url 'password_change' %}" class="btn btn-outline-secondary">
-                    Change Password
-                </a>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}s
+{% endblock %}
