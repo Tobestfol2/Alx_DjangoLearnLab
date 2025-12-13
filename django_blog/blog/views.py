@@ -17,6 +17,14 @@ def register_view(request):
         form = RegisterForm()
     return render(request, 'auth/register.html', {'form': form})
 
+@login_required
+def profile_view(request):
+    if request.method == 'POST':
+        request.user.email = request.POST.get('email', request.user.email)
+        request.user.save()
+        messages.success(request, 'Profile updated!')
+    return render(request, 'auth/profile.html')
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)

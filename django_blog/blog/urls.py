@@ -1,11 +1,8 @@
-from django.urls import path
-from . import views
+from django.urls import path, include   # make sure 'include' is imported
+# ... your existing urlpatterns from the first task ...
 
-urlpatterns = [
-    # Your existing blog URLs (post list, detail, etc.) go here...
-
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),  # adds login, logout, password change, etc.
     path('accounts/register/', views.register_view, name='register'),
-    path('accounts/login/', views.login_view, name='login'),
-    path('accounts/logout/', views.logout_view, name='logout'),
     path('accounts/profile/', views.profile_view, name='profile'),
 ]
