@@ -1,21 +1,27 @@
-# Social Media API – User Authentication System
+## Posts and Comments API
 
-A Django REST Framework-based social media backend with custom user profiles and token-based authentication.
+Base URL: `http://127.0.0.1:8000/api/`
 
-## Features
-- Custom user model with bio, profile picture, and follower relationships
-- Token authentication (returns token on registration and login)
-- Endpoints: register, login, view/update profile
-- Profile picture upload support
+### Posts
+- **GET /posts/** → List all posts (paginated, searchable by title/content)
+- **POST /posts/** → Create post (authenticated)
+- **GET /posts/{id}/** → Retrieve post
+- **PATCH/PUT /posts/{id}/** → Update post (owner only)
+- **DELETE /posts/{id}/** → Delete post (owner only)
 
-## Requirements
-- Python 3.9+
-- Django 5.x
-- djangorestframework
-- pillow (for image uploads)
+### Comments (Nested)
+- **GET /posts/{post_id}/comments/** → List comments on post
+- **POST /posts/{post_id}/comments/** → Add comment (authenticated)
+- **PATCH/DELETE /posts/{post_id}/comments/{id}/** → Update/delete comment (owner only)
 
-## Setup Instructions
-
-1. Install dependencies:
-   ```bash
-   pip install django djangorestframework pillow
+### Example Response (Post)
+```json
+{
+    "id": 1,
+    "author": {"id": 1, "username": "testuser"},
+    "title": "My Post",
+    "content": "Hello!",
+    "created_at": "2025-12-15T10:00:00Z",
+    "comments_count": 3,
+    "comments": [...]
+}
