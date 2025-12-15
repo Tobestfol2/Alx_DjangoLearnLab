@@ -1,27 +1,34 @@
-## Posts and Comments API
+## User Relationships & Personalized Feed
 
-Base URL: `http://127.0.0.1:8000/api/`
+### Follow / Unfollow Endpoints
+Base URL: `http://127.0.0.1:8000/api/auth/`
 
-### Posts
-- **GET /posts/** → List all posts (paginated, searchable by title/content)
-- **POST /posts/** → Create post (authenticated)
-- **GET /posts/{id}/** → Retrieve post
-- **PATCH/PUT /posts/{id}/** → Update post (owner only)
-- **DELETE /posts/{id}/** → Delete post (owner only)
+- **POST /follow/<int:user_id>/**  
+  Follow a user.  
+  Requires authentication.  
+  Example: `/follow/3/` → follow user with ID 3
 
-### Comments (Nested)
-- **GET /posts/{post_id}/comments/** → List comments on post
-- **POST /posts/{post_id}/comments/** → Add comment (authenticated)
-- **PATCH/DELETE /posts/{post_id}/comments/{id}/** → Update/delete comment (owner only)
+- **POST /unfollow/<int:user_id>/**  
+  Unfollow a user.
 
-### Example Response (Post)
+### Feed Endpoint
+- **GET /api/feed/**  
+  Returns a chronological feed of posts from:
+  - Users you follow
+  - Your own posts  
+  Ordered by newest first.  
+  Requires authentication.
+
+### Example Feed Response
 ```json
-{
-    "id": 1,
-    "author": {"id": 1, "username": "testuser"},
-    "title": "My Post",
-    "content": "Hello!",
-    "created_at": "2025-12-15T10:00:00Z",
-    "comments_count": 3,
+[
+  {
+    "id": 10,
+    "author": {"id": 3, "username": "alice"},
+    "title": "Beautiful sunset",
+    "content": "Check this out!",
+    "created_at": "2025-12-15T14:30:00Z",
+    "comments_count": 5,
     "comments": [...]
-}
+  }
+]
