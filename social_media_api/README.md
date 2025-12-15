@@ -1,34 +1,26 @@
-## User Relationships & Personalized Feed
+## Likes & Notifications
 
-### Follow / Unfollow Endpoints
-Base URL: `http://127.0.0.1:8000/api/auth/`
+### Likes
+- **POST /api/posts/{id}/like/** → Like a post (creates notification if not own post)
+- **POST /api/posts/{id}/unlike/** → Unlike a post
+- Prevents duplicate likes
 
-- **POST /follow/<int:user_id>/**  
-  Follow a user.  
-  Requires authentication.  
-  Example: `/follow/3/` → follow user with ID 3
+### Notifications
+- **GET /api/notifications/** → List user's notifications (unread flagged)
+- **PATCH /api/notifications/** → Mark all as read
 
-- **POST /unfollow/<int:user_id>/**  
-  Unfollow a user.
+### Notification Types
+- "started following you"
+- "liked your post"
+- "commented on your post"
 
-### Feed Endpoint
-- **GET /api/feed/**  
-  Returns a chronological feed of posts from:
-  - Users you follow
-  - Your own posts  
-  Ordered by newest first.  
-  Requires authentication.
-
-### Example Feed Response
+### Example Notification
 ```json
-[
-  {
-    "id": 10,
-    "author": {"id": 3, "username": "alice"},
-    "title": "Beautiful sunset",
-    "content": "Check this out!",
-    "created_at": "2025-12-15T14:30:00Z",
-    "comments_count": 5,
-    "comments": [...]
-  }
-]
+{
+  "id": 1,
+  "actor": "alice",
+  "verb": "liked your post",
+  "target": "My First Post",
+  "unread": true,
+  "timestamp": "2025-12-15T12:00:00Z"
+}

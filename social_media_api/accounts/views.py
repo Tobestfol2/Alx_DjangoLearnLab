@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
 from .models import CustomUser  # ← Added direct import of CustomUser
+from notifications.models import Notification
 
 User = get_user_model()  # Keep this for compatibility
 
@@ -98,4 +99,13 @@ class UnfollowUserView(generics.GenericAPIView):  # ← Changed to GenericAPIVie
         return Response(
             {"detail": f"You have unfollowed {user_to_unfollow.username}."},
             status=status.HTTP_200_OK
+        )
+
+        request.user.following.add(user_to_follow)
+
+        # Create notification
+        Notification.objects.create(
+            recipient=user_to_follow,
+            actor=request.user,
+            verb="started following you"
         )
