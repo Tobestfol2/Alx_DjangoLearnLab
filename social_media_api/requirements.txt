@@ -1,0 +1,9 @@
+Django>=5.0
+djangorestframework
+pillow
+gunicorn
+psycopg2-binary
+django-filter
+drf-nested-routers
+django-cors-headers  
+whitenoise  
