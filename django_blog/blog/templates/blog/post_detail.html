@@ -1,4 +1,8 @@
 <form method="post" action="{% url 'comment_create' post.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Post Comment</button>
+</form>
 {% extends 'base.html' %}
 {% block content %}
 <h1>{{ post.title }}</h1>
