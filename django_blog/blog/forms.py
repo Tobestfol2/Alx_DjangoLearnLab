@@ -1,5 +1,6 @@
 from django import forms
 from .models import Comment
+from .models import Post
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -15,3 +16,13 @@ class CommentForm(forms.ModelForm):
         labels = {
             'content': '',
         }
+        
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'tags']  # tags included
+        
+    tags = forms.CharField(
+        help_text="Separate tags with commas (e.g., python, django, web)",
+        required=False
+    )
