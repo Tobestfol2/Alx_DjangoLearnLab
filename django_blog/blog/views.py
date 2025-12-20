@@ -119,3 +119,18 @@ class TagPostsView(ListView):
         context = super().get_context_data(**kwargs)
         context['tag'] = self.kwargs['tag_name']
         return context
+    
+    from django.views.generic import ListView
+
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/tag_posts.html'  # Or reuse search_results.html
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs['tag_slug'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tag'] = self.kwargs['tag_slug']
+        return context
