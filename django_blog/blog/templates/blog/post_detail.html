@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>By {{ post.author }} on {{ post.created_at|date:"F d, Y" }}</p>
+<div>{{ post.content|linebreaks }}</div>
+
+<hr>
+
+<h3>Comments ({{ post.comments.count }})</h3>
+
+{% if user.is_authenticated %}
+<h4>Add a comment</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Post Comment</button>
+</form>
+{% else %}
+<p><a href="{% url 'login' %}">Log in</a> to post a comment.</p>
+{% endif %}
+
+<hr>
+
+{% for comment in comments %}
+<div class="comment">
+    <p><strong>{{ comment.author }}</strong> on {{ comment.created_at|date:"F d, Y H:i" }}</p>
+    <p>{{ comment.content|linebreaks }}</p>
+    {% if user == comment.author %}
+    <p>
+        <a href="{% url 'comment_edit' post.pk comment.pk %}">Edit</a> |
+        <a href="{% url 'comment_delete' post.pk comment.pk %}">Delete</a>
+    </p>
+    {% endif %}
+    <hr>
+</div>
+{% empty %}
+<p>No comments yet.</p>
+{% endfor %}
+
+{% endblock %}
